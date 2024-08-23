@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .filter-container {
+            margin-bottom: 20px;
+        }
+        .charts-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .chart-row {
+            display: flex;
+            width: 100%;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-wrapper {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .chart {
+            width: 100%;
+            height: 400px;
+        }
+        select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        @media (max-width: 768px) {
+            .chart-row {
+                flex-direction: column;
+            }
+            .chart-wrapper {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard</h1>
+        <div class="filter-container">
+            <label for="filter">Filter by:</label>
+            <select id="filter">
+                <option value="default">Default</option>
+                <option value="gender">Gender</option>
+                <option value="marriage">Marital Status</option>
+                <option value="age_bin">Age Group</option>
+                <option value="education">Education Level</option>
+            </select>
+        </div>
+        <div class="charts-container">
+            <div class="chart-row">
+                <div class="chart-wrapper">
+                    <div class="chart-header">
+                        <h2>Late Payments</h2>
+                        <div>
+                            <label for="latePaymentsFilter">Select Late Payments:</label>
+                            <select id="latePaymentsFilter">
+                                <option value="all">All</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="chart1" class="chart"></div>
+                </div>
+                <div class="chart-wrapper">
+                    <div class="chart-header">
+                        <h2>Credit Score</h2>
+                        <div>
+                            <label for="creditScoreFilter">Credit Score Filter:</label>
+                            <select id="creditScoreFilter">
+                                <option value="all">All</option>
+                                <option value="above30">Above 30</option>
+                                <option value="below30">30 or Below</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="chart2" class="chart"></div>
+                </div>
+            </div>
+            <div class="chart-row">
+                <div class="chart-wrapper">
+<!-- chart 3 is for spend by age group-->
+ <!------------------------------------------------------------------------>
+                    <div class="chart-header">
+                        <h2>Monthly Spend by Age Group</h2>
+                        <div>
+<!-- these are the age categories for the drop down box-->
+                            <label for="ageRange">Select Age Range:</label>
+                            <select id="ageRange" onchange="updateChart()">
+                                <option value="18-24">18-24</option>
+                                <option value="25-34">25-34</option>
+                                <option value="35-44">35-44</option>
+                                <option value="45-54">45-54</option>
+                                <option value="55-64">55-64</option>
+                                <option value="65+">65+</option>
+                            </select>
+<!-- the reset button-->
+                            <button onclick="resetChart()">Reset</button>
+                        </div>
+                    </div>
+
+                    <div id="chart3" class="chart"></div>
+                </div>
+                <div class="chart-wrapper">
+                    <div class="chart-header">
+                        <h2>Chart 4</h2>
+                    </div>
+                    <div id="chart4" class="chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="dashboard.js"></script>
+</body>
+</html>
